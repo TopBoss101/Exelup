@@ -1,4 +1,6 @@
+/* ===================== */
 /* RESET AND BASE STYLES */
+/* ===================== */
 * {
   margin: 0;
   padding: 0;
@@ -12,7 +14,9 @@ body {
   background-color: #fff;
 }
 
-/* HEADER AND NAVBAR */
+/* ===================== */
+/* HEADER & NAVBAR */
+/* ===================== */
 header {
   background-color: #0c1a36;
 }
@@ -52,7 +56,9 @@ header {
   background-color: #1e3a70;
 }
 
-/* HORIZONTAL DROPDOWN */
+/* ===================== */
+/* DROPDOWN MENU */
+/* ===================== */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -77,7 +83,9 @@ header {
   display: flex;
 }
 
+/* ===================== */
 /* HERO SECTIONS */
+/* ===================== */
 .hero {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
               url('images/consulting.jpg') center/cover no-repeat;
@@ -109,7 +117,9 @@ header {
   background: #e68900;
 }
 
-/* GRID SECTIONS (FEATURES, SERVICES, PRACTICES, INDUSTRIES, EXPERTS, INSIGHTS) */
+/* ===================== */
+/* GRID & CARD LAYOUTS */
+/* ===================== */
 section {
   padding: 50px 20px;
 }
@@ -126,7 +136,7 @@ section {
   gap: 20px;
 }
 
-/* CARDS */
+/* Cards */
 .feature-card,
 .service-card,
 .practice-card,
@@ -171,7 +181,9 @@ h2.section-title {
   color: #0c1a36;
 }
 
+/* ===================== */
 /* CONTACT PAGE */
+/* ===================== */
 .contact-section {
   display: flex;
   flex-wrap: wrap;
@@ -193,6 +205,15 @@ h2.section-title {
 .contact-info p {
   margin: 5px 0;
   color: #333;
+}
+
+.contact-info a {
+  color: #ff9800;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
 }
 
 .contact-form {
@@ -231,7 +252,9 @@ h2.section-title {
   background: #e68900;
 }
 
+/* ===================== */
 /* FOOTER */
+/* ===================== */
 footer {
   background: #0c1a36;
   color: white;
@@ -240,7 +263,98 @@ footer {
   margin-top: 40px;
 }
 
+/* ===================== */
+/* ANIMATIONS (FOR GSAP) */
+/* ===================== */
+.fade-in,
+.slide-up,
+.slide-left,
+.slide-right,
+.scale-in {
+  opacity: 0;
+}
+
+.slide-up { transform: translateY(30px); }
+.slide-left { transform: translateX(-30px); }
+.slide-right { transform: translateX(30px); }
+.scale-in { transform: scale(0.9); }
+
+/* ===================== */
+/* FLOATING AI BUTTON & POPUP */
+/* ===================== */
+#ai-button {
+  position: fixed;
+  top: 50%;             /* Middle of the screen */
+  right: 30px;          /* Stick to the right edge */
+  transform: translateY(-50%); /* Perfect vertical centering */
+  background: #ff9800;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.8rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 2000;
+  transition: transform 0.3s;
+}
+
+#ai-button:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Popup Modal */
+#ai-popup {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+  z-index: 2100;
+}
+
+.ai-popup-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.5s;
+  position: relative;
+}
+
+#ai-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.ai-popup-content button {
+  background: #0c1a36;
+  color: white;
+  margin: 5px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ai-popup-content button:hover {
+  background: #1e3a70;
+}
+
+/* ===================== */
 /* RESPONSIVE DESIGN */
+/* ===================== */
 @media (max-width: 768px) {
   .nav-links {
     flex-direction: column;
@@ -270,5 +384,15 @@ footer {
   .contact-section {
     flex-direction: column;
     align-items: center;
+  }
+
+  #ai-button {
+    top: auto;
+    bottom: 30px;
+    transform: none;
+  }
+
+  #ai-button:hover {
+    transform: scale(1.1);
   }
 }
