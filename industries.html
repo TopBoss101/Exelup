@@ -5,62 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Industries We Serve - Strategic Consulting</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Main Script -->
   <script src="script.js" defer></script>
-  <style>
-    /* PAGE-SPECIFIC STYLES */
-    body { margin: 0; font-family: Arial, sans-serif; }
-    header { background-color: #0c1a36; }
-    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; }
-    .logo { color: white; font-size: 1.5rem; font-weight: bold; }
-    .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
-    .nav-links li { position: relative; }
-    .nav-links a { color: white; padding: 15px 20px; text-decoration: none; display: block; transition: 0.3s; }
-    .nav-links a:hover { background-color: #1e3a70; }
-
-    /* Horizontal dropdown */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      background-color: #1e3a70;
-      white-space: nowrap;
-      display: flex;
-      padding: 10px 0;
-    }
-    .dropdown-content li { display: inline-block; }
-    .dropdown-content a { padding: 10px 20px; }
-    .dropdown:hover .dropdown-content { display: flex; }
-
-    /* HERO SECTION */
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/industries.jpg') center/cover;
-      text-align: center;
-      color: white;
-      padding: 100px 20px;
-    }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
-
-    /* INDUSTRIES GRID */
-    .industries-section { padding: 50px 20px; background: #f4f4f4; }
-    .section-title { text-align: center; font-size: 2rem; margin-bottom: 40px; color: #0c1a36; }
-    .industries-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-    .industry-card {
-      background: white;
-      width: 280px;
-      min-height: 140px;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      text-align: center;
-      transition: transform 0.3s;
-    }
-    .industry-card:hover { transform: translateY(-5px); }
-    .industry-card h3 { margin-bottom: 10px; color: #0c1a36; }
-
-    /* Footer */
-    footer { background: #0c1a36; color: white; text-align: center; padding: 20px; margin-top: 40px; }
-  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -97,23 +48,47 @@
   </header>
 
   <!-- HERO SECTION -->
-  <section class="hero">
-    <h1>Industries We Serve</h1>
-    <p>Bringing strategic insights and innovation across multiple sectors.</p>
+  <section class="hero fade-in" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/industries.jpg');">
+    <h1 class="slide-up">Industries We Serve</h1>
+    <p class="slide-up">Bringing strategic insights and innovation across multiple sectors.</p>
   </section>
 
   <!-- INDUSTRIES GRID -->
   <section class="industries-section">
-    <h2 class="section-title">Our Expertise Across Industries</h2>
+    <h2 class="section-title fade-in">Our Expertise Across Industries</h2>
     <div class="industries-grid">
-      <div class="industry-card"><h3>Telecom</h3><p>Driving growth and efficiency in the telecom sector.</p></div>
-      <div class="industry-card"><h3>Technology</h3><p>Helping tech companies innovate and scale globally.</p></div>
-      <div class="industry-card"><h3>Retail</h3><p>Optimizing customer experiences and retail operations.</p></div>
-      <div class="industry-card"><h3>Infrastructure</h3><p>Planning and executing large-scale infrastructure projects.</p></div>
-      <div class="industry-card"><h3>Finance</h3><p>Advisory and digital transformation for financial institutions.</p></div>
-      <div class="industry-card"><h3>Public Sector</h3><p>Supporting government initiatives and public services.</p></div>
-      <div class="industry-card"><h3>Manufacturing</h3><p>Streamlining operations and supply chain efficiencies.</p></div>
-      <div class="industry-card"><h3>Healthcare</h3><p>Enhancing patient outcomes through strategy and innovation.</p></div>
+      <div class="industry-card scale-in">
+        <h3>Telecom</h3>
+        <p>Driving growth and efficiency in the telecom sector.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Technology</h3>
+        <p>Helping tech companies innovate and scale globally.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Retail</h3>
+        <p>Optimizing customer experiences and retail operations.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Infrastructure</h3>
+        <p>Planning and executing large-scale infrastructure projects.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Finance</h3>
+        <p>Advisory and digital transformation for financial institutions.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Public Sector</h3>
+        <p>Supporting government initiatives and public services.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Manufacturing</h3>
+        <p>Streamlining operations and supply chain efficiencies.</p>
+      </div>
+      <div class="industry-card scale-in">
+        <h3>Healthcare</h3>
+        <p>Enhancing patient outcomes through strategy and innovation.</p>
+      </div>
     </div>
   </section>
 
@@ -121,5 +96,21 @@
   <footer>
     <p>© 2025 Strategic Consulting Firm. All rights reserved.</p>
   </footer>
+
+  <!-- FLOATING AI BUTTON & POPUP -->
+  <div id="ai-button">🤖</div>
+
+  <div id="ai-popup">
+    <div class="ai-popup-content">
+      <span id="ai-close">&times;</span>
+      <h2>Industry Challenge</h2>
+      <p id="ai-question">Click a button to start your challenge!</p>
+      <button onclick="generateChallenge('Telecom')">Telecom</button>
+      <button onclick="generateChallenge('Finance')">Finance</button>
+      <button onclick="generateChallenge('Healthcare')">Healthcare</button>
+      <button onclick="generateChallenge('Retail')">Retail</button>
+      <div id="ai-answer"></div>
+    </div>
+  </div>
 </body>
 </html>
