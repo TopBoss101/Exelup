@@ -1,1 +1,0 @@
-// Final script.js will include GSAP and AI popup logic
