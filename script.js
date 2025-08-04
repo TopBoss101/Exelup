@@ -1,61 +1,83 @@
-// Wait until the DOM is loaded
+// =====================
+// FLOATING AI BUTTON LOGIC
+// =====================
 document.addEventListener("DOMContentLoaded", () => {
-  
-  // MOBILE MENU TOGGLE
-  const menuToggle = document.createElement('div');
-  menuToggle.id = 'mobile-menu';
-  menuToggle.innerHTML = '&#9776;';
-  menuToggle.style.cursor = 'pointer';
-  menuToggle.style.color = 'white';
-  menuToggle.style.fontSize = '1.8rem';
-  menuToggle.style.display = 'none';
-  menuToggle.style.marginRight = '10px';
-  
-  // Append mobile menu icon to navbar
-  const navbar = document.querySelector('.navbar');
-  navbar.insertBefore(menuToggle, navbar.querySelector('.nav-links'));
+  const aiButton = document.getElementById("ai-button");
+  const aiPopup = document.getElementById("ai-popup");
+  const aiClose = document.getElementById("ai-close");
+  const aiQuestion = document.getElementById("ai-question");
+  const aiAnswer = document.getElementById("ai-answer");
 
-  const navLinks = document.querySelector('.nav-links');
-
-  // Show/hide menu on click
-  menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('show');
-  });
-
-  // Close menu when clicking a link (for mobile UX)
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      if (window.innerWidth <= 768) {
-        navLinks.classList.remove('show');
-      }
-    });
-  });
-
-  // SHOW MOBILE MENU BUTTON ON SMALL SCREENS
-  const handleResize = () => {
-    if (window.innerWidth <= 768) {
-      menuToggle.style.display = 'block';
-    } else {
-      menuToggle.style.display = 'none';
-      navLinks.classList.remove('show');
+  const challenges = {
+    "Telecom": {
+      question: "A telecom firm is losing customers to a competitor. What should they improve first?",
+      solution: "Enhance network coverage and customer service."
+    },
+    "Finance": {
+      question: "A bank wants to attract Gen Z customers. What is the best approach?",
+      solution: "Offer mobile-first digital banking with low fees."
+    },
+    "Healthcare": {
+      question: "A hospital wants to reduce patient wait times. What is an effective solution?",
+      solution: "Implement digital check-in and appointment scheduling systems."
+    },
+    "Retail": {
+      question: "An e-commerce site wants to increase repeat purchases. What should they focus on?",
+      solution: "Personalized recommendations and loyalty rewards."
     }
   };
 
-  window.addEventListener('resize', handleResize);
-  handleResize();
+  aiButton.addEventListener("click", () => aiPopup.style.display = "flex");
+  aiClose.addEventListener("click", () => {
+    aiPopup.style.display = "none";
+    aiAnswer.innerHTML = "";
+    aiQuestion.innerHTML = "Click a button to start your challenge!";
+  });
 
-  // OPTIONAL: Smooth scroll for internal links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href').slice(1);
-      const targetElement = document.getElementById(targetId);
-      if (targetElement) {
-        e.preventDefault();
-        window.scrollTo({
-          top: targetElement.offsetTop - 60,
-          behavior: 'smooth'
-        });
-      }
+  window.generateChallenge = (industry) => {
+    const challenge = challenges[industry];
+    aiQuestion.innerHTML = `<strong>${industry} Challenge:</strong> ${challenge.question}`;
+    aiAnswer.innerHTML = `<p><em>Think about your answer, then click to reveal solution:</em></p>
+                          <button onclick="revealSolution('${industry}')">Show Solution</button>`;
+  };
+
+  window.revealSolution = (industry) => {
+    const challenge = challenges[industry];
+    aiAnswer.innerHTML = `<p><strong>Solution:</strong> ${challenge.solution}</p>
+                          <p>🎉 Congratulations! You completed the challenge.</p>`;
+  };
+
+  // =====================
+  // GSAP SCROLL ANIMATIONS
+  // =====================
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.utils.toArray(".fade-in").forEach(el => {
+    gsap.from(el, {
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
+
+  gsap.utils.toArray(".slide-up").forEach(el => {
+    gsap.from(el, {
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
+
+  gsap.utils.toArray(".scale-in").forEach(el => {
+    gsap.from(el, {
+      scale: 0.9,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
     });
   });
 });
