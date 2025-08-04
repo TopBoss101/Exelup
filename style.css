@@ -1,398 +1,104 @@
-/* ===================== */
-/* RESET AND BASE STYLES */
-/* ===================== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+// =====================
+// FLOATING AI BUTTON WITH RANDOMIZED QUESTIONS
+// =====================
+document.addEventListener("DOMContentLoaded", () => {
+  const aiButton = document.getElementById("ai-button");
+  const aiPopup = document.getElementById("ai-popup");
+  const aiClose = document.getElementById("ai-close");
+  const aiQuestion = document.getElementById("ai-question");
+  const aiAnswer = document.getElementById("ai-answer");
 
-body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  color: #333;
-  background-color: #fff;
-}
+  // Industry questions pool
+  const challenges = {
+    "Telecom": [
+      { q: "A telecom firm is losing customers. Which strategy helps first?", a: "Improve network coverage and customer service." },
+      { q: "How can a telecom reduce churn?", a: "Offer loyalty rewards and personalized plans." },
+      { q: "Which technology can improve telecom operations?", a: "Implement AI-powered network monitoring and predictive maintenance." }
+    ],
+    "Finance": [
+      { q: "A bank wants to attract Gen Z. Best approach?", a: "Offer mobile-first digital banking with low fees." },
+      { q: "A fintech startup wants growth. Key focus?", a: "Enhancing mobile user experience and security." },
+      { q: "How can banks reduce loan default risk?", a: "Use AI-driven credit scoring and personalized lending." }
+    ],
+    "Healthcare": [
+      { q: "A hospital wants to cut wait times. Best solution?", a: "Implement online scheduling and digital check-ins." },
+      { q: "How can clinics improve patient follow-ups?", a: "Use automated reminders and telehealth consultations." },
+      { q: "What technology improves surgery outcomes?", a: "Adopt robotic-assisted surgery and AI diagnostic tools." }
+    ],
+    "Retail": [
+      { q: "An e-commerce site wants repeat sales. What helps?", a: "Personalized product recommendations and loyalty programs." },
+      { q: "A store wants to increase weekend foot traffic. Strategy?", a: "Offer weekend-exclusive discounts and in-store events." },
+      { q: "How can retailers predict demand better?", a: "Use AI analytics and track seasonal buying trends." }
+    ]
+  };
 
-/* ===================== */
-/* HEADER & NAVBAR */
-/* ===================== */
-header {
-  background-color: #0c1a36;
-}
+  // Keep track of last used question per industry to avoid immediate repeats
+  const lastUsed = { Telecom: null, Finance: null, Healthcare: null, Retail: null };
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 30px;
-}
+  // Show popup
+  aiButton.addEventListener("click", () => aiPopup.style.display = "flex");
 
-.logo {
-  color: white;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
+  // Close popup
+  aiClose.addEventListener("click", () => {
+    aiPopup.style.display = "none";
+    aiAnswer.innerHTML = "";
+    aiQuestion.innerHTML = "Click a button to start your challenge!";
+  });
 
-.nav-links {
-  list-style: none;
-  display: flex;
-}
+  // Generate a random challenge for an industry
+  window.generateChallenge = (industry) => {
+    const list = challenges[industry];
+    
+    let randomChallenge;
+    do {
+      randomChallenge = list[Math.floor(Math.random() * list.length)];
+    } while (lastUsed[industry] === randomChallenge.q && list.length > 1);
 
-.nav-links li {
-  position: relative;
-}
+    lastUsed[industry] = randomChallenge.q; // Save last question
 
-.nav-links a {
-  color: white;
-  padding: 15px 20px;
-  text-decoration: none;
-  display: block;
-  transition: 0.3s;
-}
+    aiQuestion.innerHTML = `<strong>${industry} Challenge:</strong> ${randomChallenge.q}`;
+    aiAnswer.innerHTML = `<p><em>Think about your answer, then click to reveal solution:</em></p>
+                          <button onclick="revealSolution('${industry}','${randomChallenge.q.replace(/'/g,"\\'")}')">Show Solution</button>`;
+  };
 
-.nav-links a:hover,
-.nav-links a.active {
-  background-color: #1e3a70;
-}
+  // Reveal solution
+  window.revealSolution = (industry, questionText) => {
+    const challenge = challenges[industry].find(c => c.q === questionText);
+    aiAnswer.innerHTML = `<p><strong>Solution:</strong> ${challenge.a}</p>
+                          <p>🎉 Congratulations! You completed the challenge.</p>`;
+  };
 
-/* ===================== */
-/* DROPDOWN MENU */
-/* ===================== */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 0;
-  top: 100%;
-  background-color: #1e3a70;
-  white-space: nowrap;
-  display: flex;
-  padding: 10px 0;
-  z-index: 1000;
-}
+  // =====================
+  // GSAP SCROLL ANIMATIONS
+  // =====================
+  gsap.registerPlugin(ScrollTrigger);
 
-.dropdown-content li {
-  display: inline-block;
-}
+  gsap.utils.toArray(".fade-in").forEach(el => {
+    gsap.from(el, {
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
 
-.dropdown-content a {
-  padding: 10px 20px;
-}
+  gsap.utils.toArray(".slide-up").forEach(el => {
+    gsap.from(el, {
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
 
-.dropdown:hover .dropdown-content {
-  display: flex;
-}
-
-/* ===================== */
-/* HERO SECTIONS */
-/* ===================== */
-.hero {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-              url('images/consulting.jpg') center/cover no-repeat;
-  text-align: center;
-  color: white;
-  padding: 100px 20px;
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-.hero p {
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-}
-
-.btn {
-  background: #ff9800;
-  padding: 10px 20px;
-  color: white;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: #e68900;
-}
-
-/* ===================== */
-/* GRID & CARD LAYOUTS */
-/* ===================== */
-section {
-  padding: 50px 20px;
-}
-
-.features,
-.services-grid,
-.practices-grid,
-.industries-grid,
-.experts-grid,
-.insights-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-/* Cards */
-.feature-card,
-.service-card,
-.practice-card,
-.industry-card,
-.expert-card,
-.insight-card {
-  background: white;
-  border-radius: 10px;
-  padding: 20px;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-
-.feature-card:hover,
-.service-card:hover,
-.practice-card:hover,
-.industry-card:hover,
-.expert-card:hover,
-.insight-card:hover {
-  transform: translateY(-5px);
-}
-
-.feature-card img,
-.expert-card img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.expert-card img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 50%;
-  margin-bottom: 10px;
-}
-
-h2.section-title {
-  text-align: center;
-  font-size: 2rem;
-  margin-bottom: 40px;
-  color: #0c1a36;
-}
-
-/* ===================== */
-/* CONTACT PAGE */
-/* ===================== */
-.contact-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  background: #f4f4f4;
-  padding: 50px 20px;
-}
-
-.contact-info {
-  width: 300px;
-}
-
-.contact-info h2 {
-  color: #0c1a36;
-  margin-bottom: 10px;
-}
-
-.contact-info p {
-  margin: 5px 0;
-  color: #333;
-}
-
-.contact-info a {
-  color: #ff9800;
-  text-decoration: none;
-}
-
-.contact-info a:hover {
-  text-decoration: underline;
-}
-
-.contact-form {
-  background: white;
-  padding: 20px;
-  width: 320px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-form h2 {
-  margin-bottom: 15px;
-  color: #0c1a36;
-}
-
-.contact-form input,
-.contact-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.contact-form button {
-  background: #ff9800;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.contact-form button:hover {
-  background: #e68900;
-}
-
-/* ===================== */
-/* FOOTER */
-/* ===================== */
-footer {
-  background: #0c1a36;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 40px;
-}
-
-/* ===================== */
-/* ANIMATIONS (FOR GSAP) */
-/* ===================== */
-.fade-in,
-.slide-up,
-.slide-left,
-.slide-right,
-.scale-in {
-  opacity: 0;
-}
-
-.slide-up { transform: translateY(30px); }
-.slide-left { transform: translateX(-30px); }
-.slide-right { transform: translateX(30px); }
-.scale-in { transform: scale(0.9); }
-
-/* ===================== */
-/* FLOATING AI BUTTON & POPUP */
-/* ===================== */
-#ai-button {
-  position: fixed;
-  top: 50%;             /* Middle of the screen */
-  right: 30px;          /* Stick to the right edge */
-  transform: translateY(-50%); /* Perfect vertical centering */
-  background: #ff9800;
-  color: white;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.8rem;
-  cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  z-index: 2000;
-  transition: transform 0.3s;
-}
-
-#ai-button:hover {
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Popup Modal */
-#ai-popup {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  justify-content: center;
-  align-items: center;
-  z-index: 2100;
-}
-
-.ai-popup-content {
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  width: 350px;
-  text-align: center;
-  animation: fadeIn 0.5s;
-  position: relative;
-}
-
-#ai-close {
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.ai-popup-content button {
-  background: #0c1a36;
-  color: white;
-  margin: 5px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.ai-popup-content button:hover {
-  background: #1e3a70;
-}
-
-/* ===================== */
-/* RESPONSIVE DESIGN */
-/* ===================== */
-@media (max-width: 768px) {
-  .nav-links {
-    flex-direction: column;
-    display: none;
-    background: #0c1a36;
-    width: 100%;
-  }
-
-  .nav-links li {
-    text-align: center;
-  }
-
-  .nav-links.show {
-    display: flex;
-  }
-
-  .features,
-  .services-grid,
-  .practices-grid,
-  .industries-grid,
-  .experts-grid,
-  .insights-grid {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .contact-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  #ai-button {
-    top: auto;
-    bottom: 30px;
-    transform: none;
-  }
-
-  #ai-button:hover {
-    transform: scale(1.1);
-  }
-}
+  gsap.utils.toArray(".scale-in").forEach(el => {
+    gsap.from(el, {
+      scale: 0.9,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: { trigger: el, start: "top 85%" }
+    });
+  });
+});
