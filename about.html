@@ -3,81 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Us - Strategic Consulting</title>
+  <title>About Us - Strategic Consulting Firm</title>
   <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Main Script -->
   <script src="script.js" defer></script>
-  <style>
-    /* PAGE-SPECIFIC QUICK STYLES */
-    body { margin: 0; font-family: Arial, sans-serif; }
-    header { background-color: #0c1a36; }
-    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; }
-    .logo { color: white; font-size: 1.5rem; font-weight: bold; }
-    .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
-    .nav-links li { position: relative; }
-    .nav-links a { color: white; padding: 15px 20px; text-decoration: none; display: block; transition: 0.3s; }
-    .nav-links a:hover { background-color: #1e3a70; }
-    
-    /* Horizontal dropdown */
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 100%;
-      background-color: #1e3a70;
-      white-space: nowrap;
-      display: flex;
-      padding: 10px 0;
-    }
-    .dropdown-content li { display: inline-block; }
-    .dropdown-content a { padding: 10px 20px; }
-    .dropdown:hover .dropdown-content { display: flex; }
-
-    /* Hero section */
-    .hero {
-      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/team.jpg') center/cover;
-      text-align: center;
-      color: white;
-      padding: 100px 20px;
-    }
-    .hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
-
-    /* About section */
-    .about-section {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
-      padding: 50px 20px;
-      background: #f4f4f4;
-    }
-    .about-image {
-      width: 40%;
-      min-width: 280px;
-      border-radius: 10px;
-      margin: 20px;
-    }
-    .about-text {
-      width: 40%;
-      min-width: 280px;
-      margin: 20px;
-    }
-    .about-text h2 { margin-bottom: 15px; color: #0c1a36; }
-    .btn {
-      display: inline-block;
-      margin-top: 15px;
-      background: #ff9800;
-      padding: 10px 20px;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-    }
-
-    /* Footer */
-    footer { background: #0c1a36; color: white; text-align: center; padding: 20px; margin-top: 40px; }
-  </style>
 </head>
 <body>
-  <!-- HEADER -->
+  <!-- HEADER / NAVBAR -->
   <header>
     <nav class="navbar">
       <div class="logo">Strategic Consulting</div>
@@ -111,15 +48,17 @@
   </header>
 
   <!-- HERO SECTION -->
-  <section class="hero">
-    <h1>About Our Firm</h1>
-    <p>Delivering innovative solutions and strategic insights for over a decade.</p>
+  <section class="hero fade-in" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/team.jpg') no-repeat center/cover;">
+    <div class="hero-content slide-up">
+      <h1>About Our Firm</h1>
+      <p class="slide-up">Delivering innovative solutions and strategic insights for over a decade.</p>
+    </div>
   </section>
 
-  <!-- ABOUT SECTION -->
+  <!-- ABOUT CONTENT SECTION -->
   <section class="about-section">
-    <img src="images/consulting.jpg" alt="About Us" class="about-image">
-    <div class="about-text">
+    <img src="images/consulting.jpg" alt="About Us" class="about-image slide-left">
+    <div class="about-text slide-right">
       <h2>Who We Are</h2>
       <p>
         Strategic Consulting Firm is a global leader in management consulting, technology transformation,
@@ -130,7 +69,7 @@
         Our team of industry experts and innovation specialists help organizations transform challenges 
         into opportunities, with sustainable growth as a core principle in every project we undertake.
       </p>
-      <a href="services.html" class="btn">Explore Our Services</a>
+      <a href="services.html" class="btn slide-up">Explore Our Services</a>
     </div>
   </section>
 
@@ -138,5 +77,22 @@
   <footer>
     <p>© 2025 Strategic Consulting Firm. All rights reserved.</p>
   </footer>
+
+  <!-- Floating AI Button -->
+  <div id="ai-button">🤖</div>
+
+  <!-- Popup Modal -->
+  <div id="ai-popup">
+    <div class="ai-popup-content">
+      <span id="ai-close">&times;</span>
+      <h2>Industry Challenge</h2>
+      <p id="ai-question">Click a button to start your challenge!</p>
+      <button onclick="generateChallenge('Telecom')">Telecom</button>
+      <button onclick="generateChallenge('Finance')">Finance</button>
+      <button onclick="generateChallenge('Healthcare')">Healthcare</button>
+      <button onclick="generateChallenge('Retail')">Retail</button>
+      <div id="ai-answer"></div>
+    </div>
+  </div>
 </body>
 </html>
