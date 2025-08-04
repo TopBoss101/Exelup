@@ -1,0 +1,274 @@
+/* RESET AND BASE STYLES */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff;
+}
+
+/* HEADER AND NAVBAR */
+header {
+  background-color: #0c1a36;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+}
+
+.logo {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links a {
+  color: white;
+  padding: 15px 20px;
+  text-decoration: none;
+  display: block;
+  transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  background-color: #1e3a70;
+}
+
+/* HORIZONTAL DROPDOWN */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: #1e3a70;
+  white-space: nowrap;
+  display: flex;
+  padding: 10px 0;
+  z-index: 1000;
+}
+
+.dropdown-content li {
+  display: inline-block;
+}
+
+.dropdown-content a {
+  padding: 10px 20px;
+}
+
+.dropdown:hover .dropdown-content {
+  display: flex;
+}
+
+/* HERO SECTIONS */
+.hero {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('images/consulting.jpg') center/cover no-repeat;
+  text-align: center;
+  color: white;
+  padding: 100px 20px;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+.btn {
+  background: #ff9800;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #e68900;
+}
+
+/* GRID SECTIONS (FEATURES, SERVICES, PRACTICES, INDUSTRIES, EXPERTS, INSIGHTS) */
+section {
+  padding: 50px 20px;
+}
+
+.features,
+.services-grid,
+.practices-grid,
+.industries-grid,
+.experts-grid,
+.insights-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* CARDS */
+.feature-card,
+.service-card,
+.practice-card,
+.industry-card,
+.expert-card,
+.insight-card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.feature-card:hover,
+.service-card:hover,
+.practice-card:hover,
+.industry-card:hover,
+.expert-card:hover,
+.insight-card:hover {
+  transform: translateY(-5px);
+}
+
+.feature-card img,
+.expert-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.expert-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+h2.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #0c1a36;
+}
+
+/* CONTACT PAGE */
+.contact-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  background: #f4f4f4;
+  padding: 50px 20px;
+}
+
+.contact-info {
+  width: 300px;
+}
+
+.contact-info h2 {
+  color: #0c1a36;
+  margin-bottom: 10px;
+}
+
+.contact-info p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.contact-form {
+  background: white;
+  padding: 20px;
+  width: 320px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+  margin-bottom: 15px;
+  color: #0c1a36;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.contact-form button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background: #e68900;
+}
+
+/* FOOTER */
+footer {
+  background: #0c1a36;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .nav-links {
+    flex-direction: column;
+    display: none;
+    background: #0c1a36;
+    width: 100%;
+  }
+
+  .nav-links li {
+    text-align: center;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .features,
+  .services-grid,
+  .practices-grid,
+  .industries-grid,
+  .experts-grid,
+  .insights-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-section {
+    flex-direction: column;
+    align-items: center;
+  }
+}

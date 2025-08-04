@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Strategic Consulting</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <style>
+    /* PAGE-SPECIFIC STYLES */
+    body { margin: 0; font-family: Arial, sans-serif; }
+    header { background-color: #0c1a36; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; padding: 10px 30px; }
+    .logo { color: white; font-size: 1.5rem; font-weight: bold; }
+    .nav-links { list-style: none; display: flex; margin: 0; padding: 0; }
+    .nav-links li { position: relative; }
+    .nav-links a { color: white; padding: 15px 20px; text-decoration: none; display: block; transition: 0.3s; }
+    .nav-links a:hover { background-color: #1e3a70; }
+
+    /* Horizontal dropdown */
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      left: 0;
+      top: 100%;
+      background-color: #1e3a70;
+      white-space: nowrap;
+      display: flex;
+      padding: 10px 0;
+    }
+    .dropdown-content li { display: inline-block; }
+    .dropdown-content a { padding: 10px 20px; }
+    .dropdown:hover .dropdown-content { display: flex; }
+
+    /* HERO SECTION */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/infrastructure.jpg') center/cover;
+      text-align: center;
+      color: white;
+      padding: 100px 20px;
+    }
+    .hero h1 { font-size: 2.5rem; margin-bottom: 20px; }
+
+    /* CONTACT SECTION */
+    .contact-section { padding: 50px 20px; background: #f4f4f4; display: flex; flex-wrap: wrap; justify-content: center; gap: 40px; }
+    .contact-info { width: 300px; }
+    .contact-info h2 { color: #0c1a36; margin-bottom: 10px; }
+    .contact-info p { margin: 5px 0; color: #333; }
+
+    /* CONTACT FORM */
+    .contact-form {
+      background: white;
+      padding: 20px;
+      width: 320px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .contact-form h2 { margin-bottom: 15px; color: #0c1a36; }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .contact-form button {
+      background: #ff9800;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .contact-form button:hover { background: #e68900; }
+
+    /* Footer */
+    footer { background: #0c1a36; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Strategic Consulting</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        
+        <li class="dropdown">
+          <a href="services.html">Services ▼</a>
+          <ul class="dropdown-content">
+            <li><a href="#">Strategic Advisory</a></li>
+            <li><a href="#">Management Consulting</a></li>
+            <li><a href="#">Digital Transformation</a></li>
+            <li><a href="#">Technology & IT</a></li>
+            <li><a href="#">Telecom Consulting</a></li>
+            <li><a href="#">Infrastructure Projects</a></li>
+            <li><a href="#">Supply Chain & Ops</a></li>
+            <li><a href="#">Customer Experience</a></li>
+            <li><a href="#">Project Delivery</a></li>
+            <li><a href="#">Training & Capability Building</a></li>
+          </ul>
+        </li>
+
+        <li><a href="practices.html">Practices</a></li>
+        <li><a href="industries.html">Industries</a></li>
+        <li><a href="experts.html">Experts</a></li>
+        <li><a href="insights.html">Insights</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <h1>Contact Us</h1>
+    <p>We’d love to hear from you. Reach out for inquiries or collaboration.</p>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section">
+    <!-- Contact Info -->
+    <div class="contact-info">
+      <h2>Our Office</h2>
+      <p>123 Consulting Ave, Suite 500</p>
+      <p>New York, NY 10001</p>
+      <p>Email: contact@strategicconsulting.com</p>
+      <p>Phone: +1 (555) 123-4567</p>
+    </div>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+      <h2>Send a Message</h2>
+      <form action="#" method="post">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 Strategic Consulting Firm. All rights reserved.</p>
+  </footer>
+</body>
+</html>
