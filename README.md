@@ -1,157 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exelup</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-    }
+import { useState, useEffect } from "react";
 
-    /* Navbar */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 16px 40px;
-      background: white;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-    }
+export default function ExelupSite() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [slide, setSlide] = useState(0);
 
-    .logo {
-      font-weight: bold;
-      font-size: 20px;
-      color: #007cc3;
-    }
+  const slides = [
+    { title: "Empowering Digital Future", text: "Innovate and scale with Exelup." },
+    { title: "AI-Driven Transformation", text: "Smarter automation for growth." },
+    { title: "Cloud Excellence", text: "Secure, scalable, future-ready." }
+  ];
 
-    .nav-links a {
-      margin: 0 12px;
-      text-decoration: none;
-      color: #333;
-      font-size: 14px;
-    }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSlide((prev) => (prev + 1) % slides.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
 
-    /* Hero */
-    .hero {
-      height: 80vh;
-      background: linear-gradient(120deg, #0a1f44, #007cc3);
-      color: white;
-      display: flex;
-      align-items: center;
-      padding: 60px;
-    }
-
-    .hero h1 {
-      font-size: 48px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 18px;
-      max-width: 500px;
-    }
-
-    .hero button {
-      margin-top: 20px;
-      padding: 12px 24px;
-      border: none;
-      background: white;
-      color: #007cc3;
-      font-weight: bold;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-
-    /* Cards */
-    .section {
-      padding: 60px 40px;
-      background: white;
-    }
-
-    .section h2 {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: #fafafa;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-      transition: transform 0.2s;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-    }
-
-    /* Footer */
-    .footer {
-      background: #0a1f44;
-      color: white;
-      padding: 40px;
-      text-align: center;
-    }
-  </style>
-</head>
-<body>
-
-  <div class="navbar">
-    <div class="logo">EXELUP</div>
-    <div class="nav-links">
-      <a href="#">Services</a>
-      <a href="#">Industries</a>
-      <a href="#">Insights</a>
-      <a href="#">Careers</a>
-    </div>
-  </div>
-
-  <div class="hero">
-    <div>
-      <h1>Navigate Your Next</h1>
-      <p>Helping businesses transform with digital innovation, cloud, and AI technologies.</p>
-      <button>Explore More</button>
-    </div>
-  </div>
-
-  <div class="section">
-    <h2>Our Services</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Cloud</h3>
-        <p>Accelerate your cloud journey with scalable solutions.</p>
+  return (
+    <div className="font-sans">
+      {/* Navbar */}
+      <div className="flex justify-between items-center px-12 py-4 shadow sticky top-0 bg-white z-50">
+        <div className="text-xl font-bold text-blue-600">EXELUP</div>
+        <div className="relative">
+          <button onClick={() => setMenuOpen(!menuOpen)}>Services ▾</button>
+          {menuOpen && (
+            <div className="absolute top-8 left-0 bg-white shadow-lg p-6 grid grid-cols-3 gap-6 w-[600px]">
+              <div>
+                <h4 className="font-bold mb-2">Cloud</h4>
+                <p>Migration & DevOps</p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2">AI</h4>
+                <p>Automation & Analytics</p>
+              </div>
+              <div>
+                <h4 className="font-bold mb-2">Security</h4>
+                <p>Enterprise protection</p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-      <div class="card">
-        <h3>AI & Automation</h3>
-        <p>Drive efficiency using AI-powered transformation.</p>
+
+      {/* Hero Slider */}
+      <div className="h-[90vh] flex items-center px-20 bg-gradient-to-r from-blue-900 to-blue-500 text-white">
+        <div>
+          <h1 className="text-5xl mb-4">{slides[slide].title}</h1>
+          <p className="text-lg">{slides[slide].text}</p>
+        </div>
       </div>
-      <div class="card">
-        <h3>Digital Experience</h3>
-        <p>Enhance customer engagement across channels.</p>
-      </div>
-      <div class="card">
-        <h3>Cybersecurity</h3>
-        <p>Protect your enterprise with robust security systems.</p>
+
+      {/* About */}
+      <section className="px-20 py-20 bg-white">
+        <h2 className="text-3xl mb-6">About Exelup</h2>
+        <p className="max-w-2xl">Exelup is a digital innovation partner helping enterprises adopt modern technologies and scale globally.</p>
+      </section>
+
+      {/* Clients */}
+      <section className="px-20 py-20 bg-gray-100">
+        <h2 className="text-3xl mb-6">Our Clients</h2>
+        <div className="flex gap-10">
+          <div className="p-6 bg-white shadow">Client A</div>
+          <div className="p-6 bg-white shadow">Client B</div>
+          <div className="p-6 bg-white shadow">Client C</div>
+        </div>
+      </section>
+
+      {/* Case Studies */}
+      <section className="px-20 py-20 bg-white">
+        <h2 className="text-3xl mb-6">Case Studies</h2>
+        <div className="grid grid-cols-3 gap-6">
+          <div className="p-6 shadow hover:shadow-lg">AI Transformation</div>
+          <div className="p-6 shadow hover:shadow-lg">Cloud Migration</div>
+          <div className="p-6 shadow hover:shadow-lg">Security Overhaul</div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <div className="bg-blue-900 text-white text-center p-6">
+        © 2026 Exelup. All rights reserved.
       </div>
     </div>
-  </div>
-
-  <div class="footer">
-    <p>© 2026 Exelup. All rights reserved.</p>
-  </div>
-
-</body>
-</html>
+  );
+}
